@@ -1,0 +1,184 @@
+<!-- 
+////////////////
+//
+// HTML
+//
+////////////////
+ -->
+ 
+<html> 
+<head> 
+<title>Test</title>
+
+<!--  press the "poly" button to input polyline file and "org" button to input organization file -->
+<p>poly</p><input type='file' accept='text/plain' onchange='openFile(event)'><p>org</p><input type='file' accept='text/plain' onchange='openFile1(event)'><br>
+<img id='output'> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false"></script>
+<style type="text/css"> 
+#map {width:670px;height:600px;}
+</style> 
+<script type='text/javascript'>
+
+////////////////
+//
+//  Read in data
+//
+////////////////
+
+var orgs = [] 
+
+// This function reads in a datafile describing which organization each employee belongs to
+var openFile1 = function(event){
+console.log("were in");
+
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      
+      //delimited by newlines
+	orgs = reader.result.split('\n');
+
+    };
+    reader.readAsText(input.files[0]);
+};
+
+// This function reads in a datafile containing the encoded google maps polyline for each employee
+  var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+	var lines = reader.result.split('\n');
+
+do_it(lines);
+    };
+    reader.readAsText(input.files[0]);
+
+  };
+
+  //////////////////
+  //
+  //  Plot polylines
+  //
+  //////////////////
+  
+  
+function do_it(PLEASE_WORK) {
+
+	// set up google map, so that the zoom level is correct, it is centered on the correct location, etc.  
+    var myLatlng_west_point = new google.maps.LatLng(40.2067735, -75.2993434);// west point
+    var myLatlng_kenilworth = new google.maps.LatLng(40.676511, -74.292584);// kenilworth
+    var myLatlng_whitehouse = new google.maps.LatLng(40.608234, -74.775405);// whitehouse
+    var myLatlng_bridgewater = new google.maps.LatLng(40.592926, -74.604484);// bridgewater
+
+    var myLatlng = new google.maps.LatLng(40.472360, -74.627713);
+    var myOptions = {
+        zoom: 8,
+        center: myLatlng,
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    }
+    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+	var the_code = PLEASE_WORK[0].substring(0,10)
+	console.log("the code:");
+	console.log(the_code);
+
+// The following "if" statements create the google maps "bubble" on the destination location	
+	
+if (the_code === "{zktFfwqjM"){ 	
+  var marker = new google.maps.Marker({
+      position: myLatlng_west_point,
+      map: map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      title: 'West point'
+  });
+} // endif
+
+if (the_code === "q`xvFjnjgM"){ 
+  var marker = new google.maps.Marker({
+      position: myLatlng_whitehouse,
+      map: map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      title: 'Whitehouse'
+  });  
+} // endif
+  
+if (the_code === "qwgwFpamdM"){  
+  var marker = new google.maps.Marker({
+      position: myLatlng_kenilworth,
+      map: map,
+      title: 'Kenilworth'
+  });
+} // endif
+
+
+if (the_code === "sfxvFvznfM"){ 
+  var marker = new google.maps.Marker({
+      position: myLatlng_bridgewater,
+      map: map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      title: 'bridgewater'
+  });  
+} // endif
+
+
+var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+
+console.log("orgs?");
+console.log(orgs[0]);
+
+// decodes polyline data
+
+	for(var line = 0; line < PLEASE_WORK.length; line++){
+	PLEASE_WORK[line] = google.maps.geometry.encoding.decodePath(PLEASE_WORK[line]);
+	}
+if(PLEASE_WORK.length === orgs.length){
+	console.log("same length!")
+}
+
+// plots polylines on google maps, but only for the specified organization or organizations
+
+for (var i = 0; i < PLEASE_WORK.length; i++){
+
+if(orgs[i] === "B"){
+    var setRegion = new google.maps.Polyline({
+	path: PLEASE_WORK[i],
+        levels: decodedLevels,
+        strokeColor: "#000000",
+        strokeOpacity: 1.0,
+        strokeWeight: 1,
+        map: map
+    });
+}
+
+
+}
+
+}
+
+
+function decodeLevels(encodedLevelsString) {
+    var decodedLevels = [];
+
+    for (var i = 0; i < encodedLevelsString.length; ++i) {
+        var level = encodedLevelsString.charCodeAt(i) - 63;
+        decodedLevels.push(level);
+    }
+    return decodedLevels;
+}
+
+
+
+</script> 
+</head> 
+<!--<body onload="initialize()">--> 
+<body>
+<div id="map"></div>
+
+</body> 
+</html>

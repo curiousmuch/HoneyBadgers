@@ -1,0 +1,29 @@
+.buttons{
+position: absolute;
+float: left;
+left: 700px;
+
+
+}
+
+.picture{
+position: absolute;
+float: left;
+
+
+}
+
+.un_ordered{
+font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+text-decoration:none;
+
+list-style:none;
+
+padding-left:0;
+
+display:block;
+
+border-bottom:thin 1px #3366CC;	
+}
+

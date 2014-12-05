@@ -1,0 +1,78 @@
+
+<!doctype html>
+<html>
+<head>
+
+<link rel="stylesheet" href="analytics_challenge.css">
+<title>Data analytics challenge</title>
+
+</head>
+
+<body>
+
+<p><strong>Merck location change</strong></p>
+<!--<p>choose organization and location, then click "select"</p>-->
+<p>A number of employees in the provided data set are located beyond 100 miles of all target locations.<br> These individuals have been considered outliers due to an unrealistic commute time, and have been<br> filtered from the data set.</p>
+<div id = "picture" class = "picture">
+<img src=kenilworth/kenilworth_all.png>
+</div>
+
+
+<div class = "buttons">
+<ul class = "un_ordered">
+<li>
+<select id="organization">
+<option value="ALL">All organizations</option>
+<option value="A">Organization A</option>
+<option value="B">Organization B</option>
+<option value="C">Organization C</option>
+<option value="D">Organization D</option>
+<option value="E">Organization E</option>
+<option value="F">Organization F</option>
+<option value="G">Organization G</option>
+<option value="H">Organization H</option>
+<option value="I">Organization I</option>
+<option value="J">Organization J</option>
+<option value="K">Organization K</option>
+<option value="L">Organization L</option>
+</select>
+
+</li>
+<li><br></li>
+<li>
+<form action="" id="radio">
+<input type="radio" name="location" id="location 1" value="location 1">Kenilworth<br>
+<input type="radio" name="location" id="location 2" value="location 2">West Point<br>
+<input type="radio" name="location" id="location 3" value="location 3">Whitehouse<br>
+<input type="radio" name="location" id="location 4" value="location 4">Bridgewater</form>
+</li>
+<li><br></li>
+<li><button id="Go">Select</button><span>     </span><button id="next_org">Next org</button><span>     </span><button id="next_loc">Next location</button></li>
+<!--<li><img src=images/legend.png></li>-->
+<!--<li>
+<div class = "data">
+<br>
+<span> </span>-->
+<li><br></li>
+<li><span>Organization: <b id = "print_org">All</b></span><br></li>
+<li><span>Average Employee Commute Time: <b id = "avg_commute">40.5</b><span> minutes</span></span><br></li>
+<li><span>Standard Deviation of Commute Times: <b id = "std_commute">8.5</b><span> minutes</span></span><br></li>
+<li><span>Max Employee Commute Time: <b id = "max_commute">50.5</b></span<span> minutes</span><br></li>
+<li><span>Min Employee Commute Time: <b id = "min_commute">21.6</b><span> minutes</span></span></li>
+<!--<br><span>HELLOS </span>-->
+<li><br></li>
+<li><span id = "graph"><img src=images/kenilworth_graph.png></span></li>
+
+
+</div>
+</li>
+</ul>
+</div>
+
+
+
+<script src="analytics_challenge.js">
+</script>
+
+
+</html>
