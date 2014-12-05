@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
 """
 Title: loadGroupStats
-Description: Takes data from file and sorts into groups and calculates varios
-stats.
+Description: Takes data from parsed  file and sorts into groups and calculates
+various stats.
 Created on Wed Oct 29 19:37:04 2014
 
-@author: tyler
+@author: HoneyBadgers
 """
 
 from parse_commute_files import *
-import numpy
-import matplotlib.pyplot as plt
-import sys
 from collections import OrderedDict
 
 
@@ -22,11 +18,12 @@ def loadGroupStats(filename):
     groups = {}
     gStat = OrderedDict()
     for group in unique(dat[:, 0]):
-        groups.update({group:[]})
+        groups.update({group: []})
         gStat.update({group: []})
         for row in dat:
             if row[0] == group:
-                groups[group].append([row[0], float(row[1]), float(row[2]), float(row[3])])
+                groups[group].append([row[0], float(row[1]),
+                                     float(row[2]), float(row[3])])
         groups[group] = array(groups[group])
 
     # find average commute time
@@ -55,6 +52,5 @@ def loadGroupStats(filename):
         y.append(gStat[group][0])
         error.append(gStat[group][3])
 
-    return groups,gStat
-
+    return groups, gStat
 

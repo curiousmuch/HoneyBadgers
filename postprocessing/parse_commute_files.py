@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 """
 Title: parseGroups, clear outliers
 Description: Seperates file into numpy array and clears outliers
 Created on Wed Oct 29 19:37:04 2014
 
-@author: tyler
+@author: HoneyBadgers
 """
 
 from numpy import *
 set_printoptions(threshold=nan)
+
 
 def parseGroups(filename):
     inputfile = filename
